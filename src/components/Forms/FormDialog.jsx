@@ -21,15 +21,15 @@ export default class extends React.Component {
     }
 
     inputName = (event) => {
-        this.setState({name: event.target.value})
+        this.setState({ name: event.target.value })
     }
 
     inputEmail = (event) => {
-        this.setState({email: event.target.value})
+        this.setState({ email: event.target.value })
     }
 
     inputDescription = (event) => {
-        this.setState({description: event.target.value})
+        this.setState({ description: event.target.value })
     }
 
     submitForm = () => {
@@ -37,7 +37,30 @@ export default class extends React.Component {
         const email = this.state.email;
         const description = this.state.description;
 
-        
+        const payload = {
+            text: 'お問い合わせがありました\n' +
+                'お名前:' + name + '\n' +
+                'Email:' + email + '\n' +
+                'お問い合わせ:\n' + description
+        }
+        if (name !== "" && email !== "" && description !== "") {
+            const url = 'https://hooks.slack.com/services/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'
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            }).then(() => {
+                alert('送信が完了しました。追ってご連絡します！')
+                this.setState({
+                    name: "",
+                    email: "",
+                    description: ""
+                })
+                return this.props.handleClose
+            })
+        } else {
+            alert('必須項目が入力されていません。')
+        }
+
     }
 
 
@@ -52,16 +75,16 @@ export default class extends React.Component {
                 <DialogTitle id="alert-dialog-title">お問い合わフォーム</DialogTitle>
                 <DialogContent>
                     <TextInput
-                    label={"お名前(必須)"} multiline={false} rows={1}
-                    value={this.state.name} type={"text"} onChange={this.inputName}
-                    />
-                     <TextInput
-                    label={"メールアドレス(必須)"} multiline={false} rows={1}
-                    value={this.state.email} type={"email"} onChange={this.inputEmail}
+                        label={"お名前(必須)"} multiline={false} rows={1}
+                        value={this.state.name} type={"text"} onChange={this.inputName}
                     />
                     <TextInput
-                    label={"お問い合わせ内容(必須)"} multiline={true} rows={5}
-                    value={this.state.description} type={"text"} onChange={this.inputDescription}
+                        label={"メールアドレス(必須)"} multiline={false} rows={1}
+                        value={this.state.email} type={"email"} onChange={this.inputEmail}
+                    />
+                    <TextInput
+                        label={"お問い合わせ内容(必須)"} multiline={true} rows={5}
+                        value={this.state.description} type={"text"} onChange={this.inputDescription}
                     />
                 </DialogContent>
                 <DialogActions>
