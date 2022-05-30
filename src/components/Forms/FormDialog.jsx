@@ -44,7 +44,7 @@ export default class extends React.Component {
                 'お問い合わせ:\n' + description
         }
         if (name !== "" && email !== "" && description !== "") {
-            const url = 'https://hooks.slack.com/services/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'
+            const url = 'sampleURL'
             fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(payload)
