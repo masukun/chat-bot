@@ -3,7 +3,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import NoProfile from '../assets/img/no-profile.png'
-import Torahack from '../assets/img/torahack.png'
+import Author from '../assets/img/author.png'
 
 const Chat = (props) => {
     const isQuestion = (props.type === 'question');
@@ -14,7 +14,7 @@ const Chat = (props) => {
         <ListItem className={classes}>
             <ListItemAvatar>
                 {isQuestion ? (
-                    <Avatar alt="icon" src={Torahack}></Avatar>
+                    <Avatar alt="icon" src={Author}></Avatar>
                 ) : (
                     <Avatar alt="icon" src={NoProfile}></Avatar>
                 )}
